@@ -1,0 +1,31 @@
+const int flameSensorPin = 7;
+const int buzzerPin = 12;
+const int ledPin = 4;
+
+void setup() {
+  pinMode(flameSensorPin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);
+  
+  // Ensure the buzzer and LED are off at the start
+  digitalWrite(buzzerPin, LOW);
+  digitalWrite(ledPin, LOW);
+  
+  Serial.begin(9600);
+}
+
+void loop() {
+  int flameState = digitalRead(flameSensorPin);
+
+  if (flameState == LOW) { // Flame detected
+    digitalWrite(buzzerPin, HIGH);
+    digitalWrite(ledPin, HIGH);
+    Serial.println("Flame detected!");
+  } else { // No flame
+    digitalWrite(buzzerPin, LOW);
+    digitalWrite(ledPin, LOW);
+    Serial.println("No flame.");
+  }
+
+  delay(100);
+}
